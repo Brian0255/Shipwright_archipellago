@@ -369,7 +369,7 @@ if (BUILD_REMOTE_CONTROL)
         set(SDL2-NET-INCLUDE ${SDL_NET_INCLUDE_DIRS})
     endif()
 
-    set(OPENSSL_USE_STATIC_LIBS OFF)
+    set(OPENSSL_USE_STATIC_LIBS ON)
 
     if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
         file(STRINGS /etc/os-release distro REGEX "^NAME=")
