@@ -146,6 +146,9 @@ bool ArchipelagoClient::StartClient() {
             ResetQueue();
             SynchSentLocations();
             SynchReceivedLocations();
+            if (gPlayState != nullptr) {
+                ArchipelagoClient::SetDataStorage("scene", gPlayState->sceneNum);
+            }
         }
     });
 
@@ -531,6 +534,21 @@ void ArchipelagoClient::ResetQueue() {
     std::swap(receiveQueue, empty);
 }
 
+void ArchipelagoClient::OnSceneInit(uint16_t sceneNum) {
+    if (!ArchipelagoClient::IsConnected())
+        return;
+    if (gPlayState == nullptr)
+        return;
+    ArchipelagoClient::SetDataStorage("scene", sceneNum);
+}
+
+void ArchipelagoClient::SetDataStorage(const std::string& key, const nlohmann::json& value) const {
+    std::string full_key =
+        std::format("oot_soh_{}_{}_{}", key, apClient->get_team_number(), apClient->get_player_number());
+    std::list<APClient::DataStorageOperation> operations = { { "replace", value } };
+    apClient->Set(full_key, 0, false, operations);
+}   
+
 bool ArchipelagoClient::slotMatch(const std::string& slotName, const std::string& roomHash) {
     if (apClient == nullptr) {
         return false;
@@ -796,6 +814,10 @@ void RegisterArchipelago() {
 
     COND_HOOK(GameInteractor::OnPlayerDeath, IS_ARCHIPELAGO,
               []() { ArchipelagoClient::GetInstance().SendDeathLink(); });
-}
+
+    COND_HOOK(GameInteractor::OnSceneInit, IS_ARCHIPELAGO,
+              [](int16_t sceneNum) { ArchipelagoClient::GetInstance().OnSceneInit(sceneNum); 
+              });
+    }
 
 static RegisterShipInitFunc initFunc(RegisterArchipelago, { "IS_ARCHIPELAGO" });

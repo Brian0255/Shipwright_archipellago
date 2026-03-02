@@ -68,6 +68,10 @@ class ArchipelagoClient {
     void Poll();
     void ResetQueue();
 
+    void OnSceneInit(uint16_t sceneNum);
+
+    void SetDataStorage(const std::string& key, const nlohmann::json& value) const;
+
     bool slotMatch(const std::string& slotName, const std::string& roomHash);
 
     std::unique_ptr<APClient> apClient;
