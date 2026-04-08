@@ -2379,11 +2379,6 @@ void StaticData::HintTable_Init() {
                                               /*french*/ "Amène les #Pierres Spirituelles# dans le passé et Zelda te donnera #[[1]]# et t'apprendra #[[2]]# !",
                                                          {QM_BLUE, QM_GREEN, QM_GREEN}));
 
-    hintTextTable[RHT_SKULLS_HINT] = HintText(CustomMessage("Yeaaarrgh! I'm cursed!!^Please save me by destroying #[[d]] Spiders of the Curse# and I will give you my #[[1]]#!",
-                                                 /*german*/ "Aarrrgh! Ich bin verflucht!^Bitte rette mich, indem Du&#[[d]] Skulltulas# zerstörst und ich&werde Dir dafür #[[1]]# geben!",
-                                                 /*french*/ "Yeaaarrgh! Je suis maudit!^Détruit encore #[[d]] Araignées de la Malédiction# et j'aurai quelque chose à te donner! #([[1]])#",
-                                                            {QM_YELLOW, QM_GREEN}));
-
     hintTextTable[RHT_MASK_SHOP_HINT] = HintText(CustomMessage("Some young scrubs in the #Deku Theatre# love seeing Masks!^"
                                                                "They'll give you #[[1]]# if you show them the #Skull Mask#, and #[[2]]# if you show them the #Mask of Truth#!",
                                                     /*german*/ "Ein paar junge Dekus in der #Waldbühne# lieben es, Masken anzuschauen!^"
@@ -2482,6 +2477,9 @@ void StaticData::HintTable_Init() {
                                                        /*german*/ "&Man kann darauf die Worte&%rMaster Quest%w entziffern...",
                                                        /*french*/ "&Étrange... les mots %r\"Master_Quest\"%w sont gravés dessus."));
 
+    hintTextTable[RHT_ARCHIPELAGO_FOREIGN] = HintText(CustomMessage("Foreign Archipelago Location",
+                                                         /*german*/ "(German todo)Foreign Archipelago Location",
+                                                         /*french*/ "(French todo)Foreign Archipelago Location"));
     // clang-format on
 }
 } // namespace Rando
